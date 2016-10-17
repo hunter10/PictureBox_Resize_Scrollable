@@ -42,5 +42,24 @@ namespace PictureBox_Resize_Scrollable
             if (pictureBox1.Image != null)
                 pictureBox1.Dispose();
         }
+
+        private void panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void panel1_DragDrop(object sender, DragEventArgs e)
+        {
+            //string file = (string)e.Data.GetData(DataFormats.FileDrop, false);
+
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+
+            foreach (string file in files)
+            {
+                pictureBox1.Image = Image.FromFile(file);
+                pictureBox1.Width = pictureBox1.Image.Width;
+                pictureBox1.Height = pictureBox1.Image.Height;
+            }
+        }
     }
 }
